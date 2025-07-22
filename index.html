@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TOBYTHEOFFENSIVE.NET</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2d9d5a64f.js" crossorigin="anonymous"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      cursor: url('https://cur.cursors-4u.net/games/gam-1/gam54.cur'), auto;
+    }
+
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Press Start 2P', monospace;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+    }
+
+    .header {
+      position: absolute;
+      top: 60px;
+      left: 20px;
+      font-size: 1.2rem;
+      color: #ff0040;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .platforms-title {
+      font-size: 1.3rem;
+      color: #00ffff;
+      margin-bottom: 30px;
+    }
+
+    .link {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 15px;
+      text-decoration: none;
+      font-size: 1.2rem;
+      margin: 15px 0;
+      color: #fff;
+      transition: transform 0.2s, color 0.2s;
+    }
+
+    .link:hover {
+      transform: scale(1.05);
+    }
+
+    .youtube:hover {
+      color: #FF0000;
+    }
+
+    .instagram:hover {
+      color: #E1306C;
+    }
+
+    .twitter:hover {
+      color: #1DA1F2;
+    }
+
+    .icon {
+      font-size: 1.5rem;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.95);
+      border: 3px solid #ff0040;
+      padding: 40px;
+      z-index: 999;
+      color: #fff;
+      font-size: 1.2rem;
+      max-width: 90%;
+      max-height: 90%;
+      box-shadow: 0 0 30px red;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      color: #ff0000;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      color: #ff69b4;
+    }
+
+    .popup img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 25px;
+      border: 2px solid #ff0000;
+      border-radius: 8px;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 10px;
+      right: 20px;
+      font-size: 0.5rem;
+      color: #888;
+      text-align: right;
+    }
+
+    a {
+      color: #00ffff;
+      text-decoration: underline;
+    }
+	
+	@keyframes rainbow-border {
+  0% { border-color: red; color: red; }
+  20% { border-color: orange; color: orange; }
+  40% { border-color: yellow; color: yellow; }
+  60% { border-color: green; color: green; }
+  80% { border-color: blue; color: blue; }
+  100% { border-color: violet; color: violet; }
+}
+
+#secret-popup {
+  animation: rainbow-border 3s infinite alternate;
+}
+
+#secret-popup div:first-child {
+  color: #fff !important; /* keep close button readable */
+}
+
+#secret-popup p a {
+  background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow-text 4s linear infinite;
+}
+
+@keyframes rainbow-text {
+  0% { background-position: 0% }
+  100% { background-position: 100% }
+}
+
+/* Pixelated default cursor */
+* {
+  box-sizing: border-box;
+  cursor: url('https://cur.cursors-4u.net/cursors/cur-11/cur1000.cur'), auto;
+}
+
+/* Scrolling Banner */
+.scroll-banner {
+  width: 100%;
+  background-color: red;
+  color: white;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.7rem;
+  padding: 10px 0;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  border-bottom: 2px solid white;
+}
+
+.scroll-text {
+  display: inline-block;
+  padding-left: 100%;
+  white-space: nowrap;
+  animation: scroll-left 15s linear infinite;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Offset site content downward to avoid overlap */
+body {
+  padding-top: 50px;
+}
+
+.minecraft:hover {
+  color: #00ff00; /* bright green on hover */
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* 🔒 prevents scrolling */
+}
+
+/* Spinning Aldi logos */
+.aldi-logo {
+  width: 100px;
+  animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Flashing red/white text */
+.flashing-text {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.2rem;
+  animation: flashText 0.5s infinite alternate;
+  margin: 0 10px;
+}
+
+/* Flashing ⚠️ icons */
+.warning-icon {
+  font-size: 1.5rem;
+  animation: flashIcon 0.5s infinite alternate;
+}
+
+/* Wrapper for Yeezy text rows */
+.yeezy-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+@keyframes flashText {
+  0%   { color: red; }
+  100% { color: white; }
+}
+
+@keyframes flashIcon {
+  0%   { opacity: 0.2; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1.2); }
+}
+
+
+  </style>
+</head>
+<body>
+
+  <div class="scroll-banner">
+   <div class="scroll-text">
+    ELON MUSK DOESN'T KNOW STYLE LIKE I DO!! PRAISE YEEZY!!
+   </div>
+  </div>
+
+  <div class="header">TobyTheOffensive</div>
+
+  <div class="container">
+    <div class="platforms-title">PLATFORMS</div>
+
+    <a class="link youtube" href="https://www.youtube.com/@tobytheoffensive" target="_blank">
+      <i class="fab fa-youtube icon"></i>
+      <span>YouTube</span>
+    </a>
+
+    <a class="link instagram" href="https://www.instagram.com/tobytheoffensive" target="_blank">
+      <i class="fab fa-instagram icon"></i>
+      <span>Instagram</span>
+    </a>
+
+    <a class="link twitter" href="https://twitter.com/toby2offensive" target="_blank">
+      <i class="fab fa-twitter icon"></i>
+      <span>X / Twitter</span>
+    </a>
+	
+    <a class="link minecraft" href="#" onclick="copyMinecraftServer()">
+	  <i class="fas fa-server icon"></i>
+     <span>Copy Minecraft Server</span>
+    </a>
+  </div>
+
+  <div class="footer">
+    ©2025 TobyTheOffensive. All rights reserved.<br />
+    Designed by Toby in ChatGPT
+  </div>
+
+  <!-- Freddy Popup -->
+  <div id="popup" class="popup">
+    <div class="close-btn" onclick="closePopup()">✖</div>
+    <div>YOU AINT READY FOR FREDDY</div>
+    <img src="https://media1.tenor.com/m/ZO1_WS7f-4YAAAAC/fnaf-freddy.gif" alt="Freddy Jumpscare GIF">
+  </div>
+
+  <!-- Secret Konami Code Popup -->
+  <div id="secret-popup" class="popup">
+    <div class="close-btn" onclick="closeSecret()">✖</div>
+    <div>✨ SECRETS OF THE UNIVERSE ✨</div>
+    <p>
+      <a href="https://youareanidiot.cc/" target="_blank">Click here to unlock!!1!</a>
+    </p>
+  </div>
+  
+  <!-- YEEZY Cheat Code Popup -->
+<div id="yeezy-popup" class="popup">
+  <div class="close-btn" onclick="closeYeezy()">✖</div>
+
+  <!-- Top Flashing Text -->
+  <div class="yeezy-banner">
+    <span class="warning-icon">⚠️</span>
+    <span class="flashing-text">PRAISE FREAKYE!!!</span>
+    <span class="warning-icon">⚠️</span>
+  </div>
+
+  <!-- Kanye + Aldi Logos -->
+  <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin: 10px 0;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/ALDI_SUD.svg/1024px-ALDI_SUD.svg.png" class="aldi-logo" />
+    <img src="https://media1.tenor.com/m/FeKn319_7-YAAAAC/kanye-west-tongue-emote-kanye.gif" alt="Kanye Freaky GIF" style="max-height: 250px; border-radius: 8px;" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/ALDI_SUD.svg/1024px-ALDI_SUD.svg.png" class="aldi-logo" />
+  </div>
+
+  <!-- Bottom Flashing Text -->
+  <div class="yeezy-banner">
+    <span class="warning-icon">⚠️</span>
+    <span class="flashing-text">PRAISE FREAKYE!!!</span>
+    <span class="warning-icon">⚠️</span>
+  </div>
+</div>
+
+
+  <script>
+    // Show Freddy popup after 3 seconds
+    setTimeout(() => {
+      document.getElementById('popup').style.display = 'block';
+    }, 3500);
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+    }
+
+    function closeSecret() {
+      document.getElementById('secret-popup').style.display = 'none';
+    }
+
+    // Konami Code Detection
+    const konamiCode = [
+      "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown",
+      "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight"
+    ];
+    let userInput = [];
+
+    document.addEventListener("keydown", function(e) {
+      userInput.push(e.key);
+      if (userInput.length > konamiCode.length) {
+        userInput.shift();
+      }
+
+      if (userInput.toString() === konamiCode.toString()) {
+        document.getElementById("secret-popup").style.display = "block";
+      }
+    });
+	function copyMinecraftServer() {
+  const serverIP = "play.tobytheoffensive.net";
+  navigator.clipboard.writeText(serverIP).then(() => {
+    alert("Server IP copied to clipboard!");
+  }).catch(err => {
+    alert("Failed to copy server IP.");
+    console.error(err);
+  });
+}
+
+// YEEZY Code logic
+let yeezyInput = "";
+
+document.addEventListener("keydown", function (e) {
+  const key = e.key.toUpperCase();
+  yeezyInput += key;
+
+  // Limit to 5 characters
+  if (yeezyInput.length > 5) yeezyInput = yeezyInput.slice(-5);
+
+  if (yeezyInput === "YEEZY") {
+    document.getElementById("yeezy-popup").style.display = "block";
+  }
+});
+
+function closeYeezy() {
+  document.getElementById("yeezy-popup").style.display = "none";
+}
+
+  </script>
+</body>
+</html>
