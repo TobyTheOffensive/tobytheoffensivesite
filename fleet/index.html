@@ -108,13 +108,21 @@
     }
 
     .footer {
-      font-size: 8px;
-      text-align: right;
-      padding: 20px;
-      color: #777;
-      bottom: 0;
-      right: 0;
-    }
+  font-size: 8px;
+  text-align: right;
+  padding: 20px;
+  color: #777;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+/* For larger screens, push it lower */
+@media (min-width: 768px) {
+  .footer {
+    bottom: -40px; /* Push it further down on desktop */
+  }
+}
   </style>
   <script>
     function toggleDropdown() {
