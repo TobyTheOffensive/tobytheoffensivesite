@@ -22,12 +22,19 @@
     }
 
     .header {
-      position: absolute;
-      top: 60px;
-      left: 20px;
-      font-size: 1.2rem;
-      color: #ff0040;
-    }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #000;
+  color: white;
+  font-family: 'Press Start 2P', monospace;
+  padding: 20px;
+  font-size: 16px;
+  text-align: left;
+  border-bottom: 3px solid #ff0000;
+  z-index: 1001;
+}
 	
 
     .container {
@@ -118,13 +125,15 @@
     }
 
     .footer {
-      position: absolute;
-      bottom: 10px;
-      right: 20px;
-      font-size: 0.5rem;
-      color: #888;
-      text-align: right;
-    }
+  background-color: #000;
+  color: #777;
+  text-align: right;
+  font-size: 8px;
+  padding: 10px 15px;
+  border-top: 1px solid #333;
+  position: sticky;
+  bottom: 0;
+}
 
     a {
       color: #00ffff;
@@ -211,7 +220,6 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden; /* 🔒 prevents scrolling */
 }
 
 /* Spinning Aldi logos */
@@ -258,8 +266,8 @@ html, body {
 }
 
 .dropdown {
-  position: absolute;
-  top: 95px; /* Adjust based on site title position */
+  position: fixed;
+  top: 90px;
   left: 20px;
   z-index: 1000;
   font-family: 'Press Start 2P', monospace;
@@ -329,6 +337,56 @@ html, body {
   line-height: 1.6;
 }
 
+.other-platforms {
+  text-align: center;
+  margin: 30px auto;
+  padding: 15px;
+  font-family: 'Press Start 2P', monospace;
+  max-width: 600px;
+}
+
+.other-platforms h3 {
+  color: #ff0000;
+  font-size: 12px;
+  margin-bottom: 15px;
+  text-shadow: 0 0 8px #ff0000;
+}
+
+.platform-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.platform {
+  text-decoration: none;
+  font-size: 10px;
+  padding: 10px 15px;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.platform.youtube {
+  color: #fff;
+  background-color: #ff0000;
+}
+
+.platform.youtube:hover {
+  background-color: #0ff;
+  color: #000;
+}
+
+.platform.apple {
+  color: #fff;
+  background-color: #FF4E6B;
+}
+
+.platform.apple:hover {
+  background-color: #0ff;
+  color: #000;
+}
 
   </style>
 </head>
@@ -365,6 +423,14 @@ html, body {
     loading="lazy">
   </iframe>
   <p class="album-desc">Dark pop brilliance meets emotional chaos. <em>Elsewhere</em> by Set It Off dives deep into a mix of aggression, energy, and self-expression.</p>
+</section>
+
+<section class="other-platforms">
+  <h3>Other Platforms</h3>
+  <div class="platform-links">
+    <a href="https://music.youtube.com/playlist?list=OLAK5uy_neSfms5uauzhJNcvuqKQVKYS9IKVcDgjM" target="_blank" class="platform youtube">YouTube Music</a>
+    <a href="https://music.apple.com/us/album/elsewhere/1603923572" target="_blank" class="platform apple">Apple Music</a>
+  </div>
 </section>
 
 
