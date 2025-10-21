@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Open Graph / Twitter Card metadata -->
+  <!-- Open Graph / Twitter Card metadata -->
   <meta property="og:title" content="The Fleet™ - TOBYTHEOFFENSIVE" />
   <meta property="og:description" content="Welcome to the worst fleet on the internet." />
   <meta property="og:image" content="https://github.com/TobyTheOffensive/tobytheoffensivesite/blob/main/fleet/tobytheoffensive-2.jpg?raw=true" />
   <meta property="og:url" content="https://tobytheoffensive.net/fleet" />
   <meta property="og:type" content="website" />
-
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="The Fleet™ - TOBYTHEOFFENSIVE" />
   <meta name="twitter:description" content="Welcome to the worst fleet on the internet." />
   <meta name="twitter:image" content="https://github.com/TobyTheOffensive/tobytheoffensivesite/blob/main/fleet/tobytheoffensive-2.jpg?raw=true" />
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Fleet™ - TOBYTHEOFFENSIVE</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a2d9d5a64f.js" crossorigin="anonymous"></script>
+  
   <style>
     * { box-sizing: border-box; }
     body { margin:0; font-family: 'Press Start 2P', monospace; background-color:#000; color:#fff; }
@@ -31,7 +32,7 @@
       border-bottom:3px solid #ff0000; z-index:1001;
     }
 
-    /* Overlay for menu */
+    /* Overlay */
     .overlay {
       position: fixed; top:0; left:0; width:100%; height:100%;
       background: rgba(0,0,0,0.6);
@@ -41,7 +42,7 @@
     }
     .overlay.active { opacity:1; visibility:visible; }
 
-    /* Dropdown menu */
+    /* Dropdown */
     .dropdown {
       position: fixed; top:80px; left:20px; z-index:1002;
     }
@@ -61,28 +62,97 @@
     .dropdown-content a:hover { background-color:#222; color:#0ff; }
     .dropdown-content.show { left:0; }
 
-    /* Fleet container */
-    .fleet-container { flex:1; margin-top:130px; padding:20px; display:flex; flex-direction: column; align-items:center; gap:30px; }
+    /* Fleet */
+    .fleet-container {
+      flex:1;
+      margin-top:130px;
+      padding:20px;
+      display:flex;
+      flex-direction: column;
+      align-items:center;
+      gap:30px;
+    }
 
     /* Car cards */
-    .car-card { background:#111; border:2px solid #444; border-radius:10px; padding:15px; width:95%; max-width:800px; box-shadow:0 0 20px rgba(255,255,255,0.1); text-align:center; }
+    .car-card {
+      background:#111;
+      border:2px solid #444;
+      border-radius:10px;
+      padding:15px;
+      width:95%;
+      max-width:800px;
+      box-shadow:0 0 20px rgba(255,255,255,0.1);
+      text-align:center;
+    }
     .car-name { font-size:12px; color:#0ff; margin-bottom:5px; }
     .car-desc, .car-eng, .car-trans, .car-status, .car-details { font-size:8px; color:#ccc; margin-bottom:5px; }
 
     /* Carousel */
-    .carousel { position:relative; width:100%; overflow:hidden; border-radius:8px; }
-    .carousel img { width:100%; display:none; border-radius:8px; }
+    .carousel {
+      position:relative;
+      width:100%;
+      overflow:hidden;
+      border-radius:8px;
+      aspect-ratio: 16 / 9;
+    }
+    .carousel img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:none;
+      border-radius:8px;
+      cursor:zoom-in;
+    }
     .carousel img.active { display:block; }
     .carousel .prev, .carousel .next {
       position:absolute; top:50%; transform:translateY(-50%);
-      background:rgba(255,0,0,0.7); border:none; color:#fff; padding:5px 10px;
+      background:rgba(255,0,0,0.7);
+      border:none; color:#fff; padding:5px 10px;
       cursor:pointer; font-size:16px; border-radius:4px;
     }
     .carousel .prev { left:10px; }
     .carousel .next { right:10px; }
 
     /* Footer */
-    .footer { background:#000; color:#777; text-align:right; font-size:8px; padding:8px 15px; border-top:1px solid #333; position:sticky; bottom:0; }
+    .footer {
+      background:#000;
+      color:#777;
+      text-align:right;
+      font-size:8px;
+      padding:8px 15px;
+      border-top:1px solid #333;
+      position:sticky;
+      bottom:0;
+      margin-top:auto;
+    }
+
+    /* Zoom overlay */
+    #zoom-overlay {
+      display:none;
+      position:fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background:rgba(0,0,0,0.95);
+      justify-content:center; align-items:center;
+      z-index:2000;
+    }
+    #zoom-overlay img {
+      max-width:90%; max-height:90%;
+      border-radius:8px; object-fit:contain;
+    }
+    #zoom-close {
+      position:absolute; top:20px; right:30px;
+      font-size:2rem; color:#fff; cursor:pointer;
+    }
+    .zoom-arrow {
+      position:absolute; top:50%; transform:translateY(-50%);
+      background:rgba(255,0,0,0.7);
+      border:none; color:#fff; font-size:2rem;
+      padding:10px; cursor:pointer; border-radius:4px;
+      z-index:2001;
+    }
+    #zoom-prev { left:30px; }
+    #zoom-next { right:30px; }
 
     @media (max-width:600px){
       .dropdown { top:60px; left:10px; }
@@ -104,13 +174,14 @@
       <div id="dropdown-content" class="dropdown-content">
         <a href="/">Home</a>
         <a href="#">Store (COMING EVENTUALLY)</a>
-        <a href="/the-fleet/">The Fleet™</a>
+        <a href="/fleet/">The Fleet™</a>
         <a href="#">Contact (WIP)</a>
       </div>
     </div>
 
+    <!-- Fleet Section -->
     <div class="fleet-container">
-      <!-- Car 1 -->
+     <!-- Car 1 -->
       <div class="car-card">
         <div class="car-name">1999 Jeep Cherokee Limited RWD</div>
         <div class="car-eng">Engine: 4.0 I6</div>
@@ -142,20 +213,27 @@
       </div>
     </div>
 
+    <!-- Footer -->
     <div class="footer">©2025 TobyTheOffensive. All rights reserved. Designed by Toby in ChatGPT.</div>
   </div>
 
+  <!-- Zoom Overlay -->
+  <div id="zoom-overlay">
+    <span id="zoom-close">&times;</span>
+    <button class="zoom-arrow" id="zoom-prev">&#10094;</button>
+    <img id="zoom-img" src="" />
+    <button class="zoom-arrow" id="zoom-next">&#10095;</button>
+  </div>
+
   <script>
-    // Dropdown toggle with overlay
+    // Dropdown toggle
     function toggleDropdown() {
       const menu = document.getElementById("dropdown-content");
       const overlay = document.getElementById("overlay");
       const isOpen = menu.classList.toggle("show");
-      if (isOpen) { overlay.classList.add("active"); } 
-      else { overlay.classList.remove("active"); }
+      if (isOpen) overlay.classList.add("active");
+      else overlay.classList.remove("active");
     }
-
-    // Close menu when clicking outside
     document.getElementById("overlay").addEventListener("click", () => {
       document.getElementById("dropdown-content").classList.remove("show");
       document.getElementById("overlay").classList.remove("active");
@@ -180,6 +258,41 @@
       index = (index - 1 + slides.length) % slides.length;
       slides[index].classList.add('active');
     }
+
+    // Zoom functionality with arrows
+    let currentZoomImages = [];
+    let currentZoomIndex = 0;
+
+    const zoomOverlay = document.getElementById("zoom-overlay");
+    const zoomImg = document.getElementById("zoom-img");
+    const zoomClose = document.getElementById("zoom-close");
+    const zoomPrev = document.getElementById("zoom-prev");
+    const zoomNext = document.getElementById("zoom-next");
+
+    document.querySelectorAll('.carousel img').forEach(img => {
+      img.addEventListener('click', () => {
+        const carousel = img.parentElement;
+        currentZoomImages = Array.from(carousel.querySelectorAll('img'));
+        currentZoomIndex = currentZoomImages.indexOf(img);
+        zoomImg.src = currentZoomImages[currentZoomIndex].src;
+        zoomOverlay.style.display = 'flex';
+      });
+    });
+
+    zoomClose.addEventListener('click', () => zoomOverlay.style.display = 'none');
+    zoomOverlay.addEventListener('click', e => { if(e.target===zoomOverlay) zoomOverlay.style.display='none'; });
+
+    zoomPrev.addEventListener('click', e => {
+      e.stopPropagation();
+      currentZoomIndex = (currentZoomIndex - 1 + currentZoomImages.length) % currentZoomImages.length;
+      zoomImg.src = currentZoomImages[currentZoomIndex].src;
+    });
+
+    zoomNext.addEventListener('click', e => {
+      e.stopPropagation();
+      currentZoomIndex = (currentZoomIndex + 1) % currentZoomImages.length;
+      zoomImg.src = currentZoomImages[currentZoomIndex].src;
+    });
   </script>
 </body>
 </html>
