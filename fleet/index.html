@@ -1,171 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Open Graph / Twitter Card metadata -->
+  <meta property="og:title" content="The Fleet™ - TOBYTHEOFFENSIVE" />
+  <meta property="og:description" content="Welcome to the worst fleet on the internet." />
+  <meta property="og:image" content="https://github.com/TobyTheOffensive/tobytheoffensivesite/blob/main/fleet/tobytheoffensive-2.jpg?raw=true" />
+  <meta property="og:url" content="https://tobytheoffensive.net/fleet" />
+  <meta property="og:type" content="website" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Fleet™ - TOBYTHEOFFENSIVE" />
+  <meta name="twitter:description" content="Welcome to the worst fleet on the internet." />
+  <meta name="twitter:image" content="https://github.com/TobyTheOffensive/tobytheoffensivesite/blob/main/fleet/tobytheoffensive-2.jpg?raw=true" />
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Fleet™</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Fleet™ - TOBYTHEOFFENSIVE</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2d9d5a64f.js" crossorigin="anonymous"></script>
   <style>
-    body {
-      background-color: #000;
-      color: #fff;
-      font-family: 'Press Start 2P', monospace;
-      margin: 0;
-      padding: 0;
-      overflow-y: scroll;
-    }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: 'Press Start 2P', monospace; background-color:#000; color:#fff; }
 
+    .page-wrapper { display:flex; flex-direction:column; min-height:100vh; }
+
+    /* Header */
     .header {
-      padding: 20px;
-      font-size: 18px;
-      background-color: #ff0000;
-      border-bottom: 3px solid #444;
+      position: fixed; top:0; left:0; width:100%;
+      background-color: #000; color:#fff;
+      padding:20px; font-size:16px;
+      border-bottom:3px solid #ff0000; z-index:1001;
     }
 
+    /* Overlay for menu */
+    .overlay {
+      position: fixed; top:0; left:0; width:100%; height:100%;
+      background: rgba(0,0,0,0.6);
+      opacity:0; visibility:hidden;
+      transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+      z-index:1000;
+    }
+    .overlay.active { opacity:1; visibility:visible; }
+
+    /* Dropdown menu */
     .dropdown {
-      position: absolute;
-      top: 95px;
-      left: 20px;
-      z-index: 1000;
-      font-family: 'Press Start 2P', monospace;
+      position: fixed; top:80px; left:20px; z-index:1002;
     }
-
     .dropdown-btn {
-      background-color: #111;
-      color: white;
-      border: 2px solid #888;
-      padding: 8px 12px;
-      cursor: pointer;
-      font-size: 12px;
+      background-color:#111; color:#fff; border:2px solid #888;
+      padding:8px 12px; cursor:pointer; font-size:12px;
     }
-
     .dropdown-content {
-      display: none;
-      flex-direction: column;
-      background-color: #000;
-      border: 2px solid #888;
-      margin-top: 5px;
+      position: fixed; top:0; left:-300px; width:280px; height:100%;
+      background:#000; border-right:2px solid #888;
+      display:flex; flex-direction: column; padding-top:100px;
+      transition:left 0.4s ease-in-out; z-index:1003;
     }
-
     .dropdown-content a {
-      padding: 10px 15px;
-      color: white;
-      text-decoration: none;
-      border-top: 1px solid #222;
-      font-size: 12px;
+      padding:14px 20px; color:#fff; text-decoration:none; border-bottom:1px solid #222; font-size:12px;
     }
+    .dropdown-content a:hover { background-color:#222; color:#0ff; }
+    .dropdown-content.show { left:0; }
 
-    .dropdown-content a:hover {
-      background-color: #222;
-      color: #0ff;
+    /* Fleet container */
+    .fleet-container { flex:1; margin-top:130px; padding:20px; display:flex; flex-direction: column; align-items:center; gap:30px; }
+
+    /* Car cards */
+    .car-card { background:#111; border:2px solid #444; border-radius:10px; padding:15px; width:95%; max-width:800px; box-shadow:0 0 20px rgba(255,255,255,0.1); text-align:center; }
+    .car-name { font-size:12px; color:#0ff; margin-bottom:5px; }
+    .car-desc, .car-eng, .car-trans, .car-status, .car-details { font-size:8px; color:#ccc; margin-bottom:5px; }
+
+    /* Carousel */
+    .carousel { position:relative; width:100%; overflow:hidden; border-radius:8px; }
+    .carousel img { width:100%; display:none; border-radius:8px; }
+    .carousel img.active { display:block; }
+    .carousel .prev, .carousel .next {
+      position:absolute; top:50%; transform:translateY(-50%);
+      background:rgba(255,0,0,0.7); border:none; color:#fff; padding:5px 10px;
+      cursor:pointer; font-size:16px; border-radius:4px;
     }
+    .carousel .prev { left:10px; }
+    .carousel .next { right:10px; }
 
-    .fleet-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px 20px;
-      gap: 50px;
+    /* Footer */
+    .footer { background:#000; color:#777; text-align:right; font-size:8px; padding:8px 15px; border-top:1px solid #333; position:sticky; bottom:0; }
+
+    @media (max-width:600px){
+      .dropdown { top:60px; left:10px; }
+      .dropdown-btn { font-size:16px; padding:8px 10px; }
+      .dropdown-content { width:240px; }
     }
-
-    .car-card {
-      background-color: #111;
-      border: 2px solid #444;
-      border-radius: 10px;
-      padding: 20px;
-      width: 90%;
-      max-width: 800px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-      text-align: center;
-    }
-
-    .car-card img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-      margin-bottom: 15px;
-    }
-
-    .car-name {
-      font-size: 14px;
-      color: #0ff;
-      margin-bottom: 10px;
-    }
-
-    .car-eng,
-    .car-trans,
-    .car-status {
-      font-size: 10px;
-      color: #ccc;
-      margin-bottom: 5px;
-    }
-
-    .car-details {
-      font-size: 10px;
-      color: #ccc;
-      margin-top: 10px;
-      line-height: 1.5em;
-    }
-
-    .footer {
-  font-size: 8px;
-  text-align: right;
-  padding: 20px;
-  color: #777;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-
-/* For larger screens, push it lower */
-@media (min-width: 768px) {
-  .footer {
-    bottom: -40px; /* Push it further down on desktop */
-  }
-}
   </style>
-  <script>
-    function toggleDropdown() {
-      const menu = document.getElementById("dropdown-content");
-      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
-    }
-  </script>
 </head>
 <body>
-  <div class="header">TobyTheOffensive Presents: The Fleet™</div>
+  <div class="page-wrapper">
+    <div class="header">TobyTheOffensive Presents: The Fleet™</div>
 
-  <div class="dropdown">
-    <button onclick="toggleDropdown()" class="dropdown-btn">☰ MENU</button>
-    <div id="dropdown-content" class="dropdown-content">
-      <a href="/">Home</a>
-      <a href="/store">Store (COMING SOON)</a>
-      <a href="/fleet/">The Fleet™</a>
-      <a href="/contact/">Contact</a>
-    </div>
-  </div>
+    <!-- Overlay -->
+    <div id="overlay" class="overlay"></div>
 
-  <div class="fleet-container">
-    <div class="car-card">
-      <img src="IMG_7534.jpg" alt="JeepXJ" />
-      <div class="car-name">1999 Jeep Cherokee Limited RWD</div>
-      <div class="car-eng">Engine: 4.0 I6</div>
-      <div class="car-trans">Transmission: AW4 4 Speed Automatic RWD</div>
-      <div class="car-status">Status: Wrecked.</div>
-      <div class="car-details">The former daily. Now sitting with it's face punched in. Not to fear, she'll return. That 4.0 will sing again some sunny day.</div>
+    <!-- Menu -->
+    <div class="dropdown">
+      <button class="dropdown-btn" onclick="toggleDropdown()">☰</button>
+      <div id="dropdown-content" class="dropdown-content">
+        <a href="/">Home</a>
+        <a href="#">Store (COMING EVENTUALLY)</a>
+        <a href="/the-fleet/">The Fleet™</a>
+        <a href="#">Contact (WIP)</a>
+      </div>
     </div>
 
-    <div class="car-card">
-      <img src="car2.jpg" alt="Jimmy" />
-      <div class="car-name">1994 GMC Jimmy RWD SLT</div>
-      <div class="car-eng">Engine: 4.3 Vortec V6</div>
-      <div class="car-trans">Transmission: 4l60 4 Speed Automatic RWD</div>
-      <div class="car-status">Status: Fucked.</div>
-      <div class="car-details">Transmission burned out in 2015, ever since, it's been yearning for the day I finally fix it.</div>
+    <div class="fleet-container">
+      <!-- Car 1 -->
+      <div class="car-card">
+        <div class="car-name">1999 Jeep Cherokee Limited RWD</div>
+        <div class="car-eng">Engine: 4.0 I6</div>
+        <div class="car-trans">Transmission: AW4 4 Speed Automatic RWD</div>
+        <div class="car-status">Status: Wrecked</div>
+        <div class="car-details">Taken too soon, she will live again some sunny day.</div>
+        <div class="carousel">
+          <img src="IMG_7534.jpg" class="active" />
+          <img src="tobytheoffensive-2.jpg" />
+          <img src="jeepwreckd.jpg" />
+          <button class="prev" onclick="prevSlide(this)">&#10094;</button>
+          <button class="next" onclick="nextSlide(this)">&#10095;</button>
+        </div>
+      </div>
+
+      <!-- Car 2 -->
+      <div class="car-card">
+        <div class="car-name">1994 GMC Jimmy RWD SLT</div>
+        <div class="car-eng">Engine: 4.3 Vortec V6</div>
+        <div class="car-trans">Transmission: 4L60E 4 Speed Automatic RWD</div>
+        <div class="car-status">Status: Inactive</div>
+        <div class="car-details">Transmission failed in 2015. Awaiting restoration and a second life on the road.</div>
+        <div class="carousel">
+          <img src="car2.jpg" class="active" />
+          <img src="car2-2.jpg" />
+          <button class="prev" onclick="prevSlide(this)">&#10094;</button>
+          <button class="next" onclick="nextSlide(this)">&#10095;</button>
+        </div>
+      </div>
     </div>
+
+    <div class="footer">©2025 TobyTheOffensive. All rights reserved. Designed by Toby in ChatGPT.</div>
   </div>
 
-  <div class="footer">
-    ©2025 TobyTheOffensive. All rights reserved. Designed by Toby in ChatGPT
-  </div>
+  <script>
+    // Dropdown toggle with overlay
+    function toggleDropdown() {
+      const menu = document.getElementById("dropdown-content");
+      const overlay = document.getElementById("overlay");
+      const isOpen = menu.classList.toggle("show");
+      if (isOpen) { overlay.classList.add("active"); } 
+      else { overlay.classList.remove("active"); }
+    }
+
+    // Close menu when clicking outside
+    document.getElementById("overlay").addEventListener("click", () => {
+      document.getElementById("dropdown-content").classList.remove("show");
+      document.getElementById("overlay").classList.remove("active");
+    });
+
+    // Carousel controls
+    function nextSlide(btn){
+      const carousel = btn.parentElement;
+      const slides = carousel.querySelectorAll('img');
+      let current = carousel.querySelector('img.active');
+      let index = Array.from(slides).indexOf(current);
+      current.classList.remove('active');
+      index = (index + 1) % slides.length;
+      slides[index].classList.add('active');
+    }
+    function prevSlide(btn){
+      const carousel = btn.parentElement;
+      const slides = carousel.querySelectorAll('img');
+      let current = carousel.querySelector('img.active');
+      let index = Array.from(slides).indexOf(current);
+      current.classList.remove('active');
+      index = (index - 1 + slides.length) % slides.length;
+      slides[index].classList.add('active');
+    }
+  </script>
 </body>
 </html>
